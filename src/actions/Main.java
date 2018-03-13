@@ -8,6 +8,6 @@ public class Main {
 
         Gui g = new Gui();
         g.create();
-        ApplicationLoop.start();
+        //ApplicationLoop.start();
     }
 }
