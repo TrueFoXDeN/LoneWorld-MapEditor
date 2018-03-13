@@ -1,6 +1,8 @@
 package draw;
 
+import data.C;
 import data.Map;
+import data.Mouse;
 import gui.Gui;
 
 import javax.swing.*;
@@ -16,18 +18,25 @@ public class Draw extends JLabel {
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 
-        g.setColor(Color.GRAY);
+
         if(Map.mapActive){
+            //DrawHover
+            if(Mouse.insideMap){
+                g.setColor(C.mapHover);
+                g.fillRect(Mouse.coord.x, Mouse.coord.y, Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
+            }
+
+            //DrawGrid
+            g.setColor(Color.GRAY);
             for (int x = 0; x <= Map.kachelnX; x++) {
                 for (int y = 0; y <= Map.kachelnY; y++) {
                     g.drawRect(x * Map.kachelGroesseCurrent + Map.x,
                             y * Map.kachelGroesseCurrent + Map.y, Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
                 }
             }
-
         }
 
-        g.setColor(Color.decode("0xccd6de"));
+        g.setColor(C.background);
         g.fillRect(0, 0, gui.getWidth(), 75);
 
         repaint();
