@@ -39,7 +39,7 @@ public class ActionHandler implements ActionListener {
                 Map.kachelnY = Integer.parseInt(Gui.inputNew[2].getText());
 
                 Map.kachelGroesseCurrent = Map.kachelGroesse;
-
+                Map.collision.clear();
                 Gui.jfNew.setVisible(false);
                 Map.mapActive = true;
             } catch (NumberFormatException e1) {

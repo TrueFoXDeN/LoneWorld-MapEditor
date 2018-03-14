@@ -25,7 +25,7 @@ public class Gui {
     private Border border = BorderFactory.createLineBorder(Color.BLACK);
     private Border borderActive = BorderFactory.createLineBorder(Color.RED);
 
-    private static int activeButton = 0;
+    public static int activeButton = 0;
 
     private final int WIDTH = 1280, HEIGHT = 720;
 

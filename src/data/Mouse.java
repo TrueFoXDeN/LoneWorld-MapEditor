@@ -27,6 +27,14 @@ public class Mouse {
 
     }
 
+    public static int posXToCood(int x){
+        return x * Map.kachelGroesseCurrent + Map.x;
+    }
+
+    public static int posYToCood(int y){
+        return y * Map.kachelGroesseCurrent + Map.y;
+    }
+
     public static void insideMap(int x, int y) {
         insideMap = x >= Map.x && x <= Map.x + Map.kachelnX * Map.kachelGroesseCurrent + Map.kachelGroesseCurrent&&
                 y >= Map.y && y <= Map.y + Map.kachelnY * Map.kachelGroesseCurrent + Map.kachelGroesseCurrent &&

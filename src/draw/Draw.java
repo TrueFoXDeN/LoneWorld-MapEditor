@@ -26,6 +26,14 @@ public class Draw extends JLabel {
                 g.fillRect(Mouse.coord.x, Mouse.coord.y, Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
             }
 
+            if(Gui.activeButton == 7){
+                for(Point p: Map.collision){
+                     g.drawImage(IL.collision, Mouse.posXToCood(p.x), Mouse.posYToCood(p.y),
+                             Map.kachelGroesseCurrent, Map.kachelGroesseCurrent, null);
+
+                }
+            }
+
             //DrawGrid
             g.setColor(Color.GRAY);
             for (int x = 0; x <= Map.kachelnX; x++) {
@@ -34,6 +42,7 @@ public class Draw extends JLabel {
                             y * Map.kachelGroesseCurrent + Map.y, Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
                 }
             }
+
         }
 
         g.setColor(C.background);

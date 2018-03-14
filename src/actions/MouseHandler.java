@@ -2,6 +2,7 @@ package actions;
 
 import data.C;
 import data.Map;
+import data.Mouse;
 import gui.Gui;
 
 import javax.swing.*;
@@ -27,7 +28,13 @@ public class MouseHandler implements MouseListener {
                 }
             }
 
+        }
 
+        if(SwingUtilities.isLeftMouseButton(e)){
+            if (Map.mapActive) {
+                Map.addCollision(e);
+                Map.removeCollision(e);
+            }
         }
 
     }

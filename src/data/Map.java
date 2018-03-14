@@ -1,6 +1,9 @@
 package data;
 
+import gui.Gui;
+
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class Map {
@@ -17,13 +20,42 @@ public class Map {
         kachelGroesseCurrent = kachelGroesse;
     }
 
-    public static void scroll(int dir){
-        if(mapActive) kachelGroesseCurrent -= dir;
+    public static void scroll(int dir) {
+        if (mapActive) kachelGroesseCurrent -= dir;
     }
 
-    public static void move(int x, int y){
+    public static void move(int x, int y) {
         Map.x += x;
         Map.y += y;
+    }
+
+    public static void addCollision(MouseEvent e) {
+
+            if (Gui.activeButton == 7) {
+                if (e.getY() >= 75) {
+                    if (!collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
+                        collision.add(new Point(Mouse.pos.x, Mouse.pos.y));
+                    }
+
+                }
+            }
+
+    }
+
+    public static void removeCollision(MouseEvent e) {
+
+            if (Gui.activeButton == 7) {
+                if (e.getY() >= 75) {
+                    if (e.isShiftDown()) {
+                        if (collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
+                            collision.remove(new Point(Mouse.pos.x, Mouse.pos.y));
+                        }
+
+                    }
+                }
+            }
+
+
     }
 
 }

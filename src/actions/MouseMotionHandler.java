@@ -4,6 +4,7 @@ import data.Map;
 import data.Mouse;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
@@ -23,6 +24,13 @@ public class MouseMotionHandler implements MouseMotionListener {
 
             Mouse.coordToPos(e.getX(), e.getY());
             Mouse.posToCoord(Mouse.pos.x, Mouse.pos.y);
+        }
+
+        if(SwingUtilities.isLeftMouseButton(e)){
+            if (Map.mapActive) {
+                Map.addCollision(e);
+                Map.removeCollision(e);
+            }
         }
 
     }
