@@ -20,8 +20,11 @@ public class ActionHandler implements ActionListener {
 
                 switch (i){
                     case 0:
-
                         Gui.jfNew.setVisible(true);
+                        break;
+                    case 8:
+                        Gui.jfSettings.setVisible(true);
+                        break;
                 }
 
             }
@@ -29,6 +32,10 @@ public class ActionHandler implements ActionListener {
 
         if(e.getSource().equals(Gui.reset)){
             Map.reset();
+        }
+
+        if(e.getSource().equals(Gui.oksettings)){
+            Gui.jfSettings.setVisible(false);
         }
 
         if(e.getSource().equals(Gui.create)){

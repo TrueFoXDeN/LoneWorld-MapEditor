@@ -14,9 +14,9 @@ import java.awt.*;
 
 public class Gui {
 
-    static public JFrame jfNew, jfMain;
+    static public JFrame jfNew, jfMain, jfSettings;
     public static JButton[] buttons = new JButton[9];
-    public static JButton reset, create;
+    public static JButton reset, create, oksettings;
 
     public static JTextArea[] inputNew = new JTextArea[3];
     public static JLabel[] lblNew = new JLabel[3];
@@ -46,6 +46,36 @@ public class Gui {
         jfNew.setLocationRelativeTo(null);
         jfNew.setResizable(false);
         jfNew.setLayout(null);
+
+        jfSettings = new JFrame("Settings");
+        jfSettings.setSize(300, 225);
+        jfSettings.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        jfSettings.setLocationRelativeTo(null);
+        jfSettings.setResizable(false);
+        jfSettings.setLayout(null);
+
+        JLabel[] lblSettings = new JLabel[3];
+        for (int i = 0; i < lblSettings.length; i++) {
+            lblSettings[i] = new JLabel();
+            lblSettings[i].setBounds(10, 20 +i*30, 250, 20);
+            lblSettings[i].setVisible(true);
+            jfSettings.add(lblSettings[i]);
+        }
+
+        lblSettings[0].setText("Map bewegen:    Rechtsklick");
+        lblSettings[1].setText("Zeichnen:            Linksklick");
+        lblSettings[2].setText("Löschen:             Shift + Linksklick");
+
+        oksettings = new JButton("Ok");
+        oksettings.setBounds(200, 150, 75, 25);
+        oksettings.setBackground(C.buttonFill);
+        oksettings.setBorder(border);
+        oksettings.setBorderPainted(true);
+        oksettings.addActionListener(new ActionHandler());
+        oksettings.addMouseListener(new MouseHandler());
+        oksettings.setFocusPainted(false);
+        oksettings.setVisible(true);
+        jfSettings.add(oksettings);
 
         for (int i = 0; i < inputNew.length; i++) {
             inputNew[i] = new JTextArea();
@@ -84,6 +114,17 @@ public class Gui {
             jfMain.add(buttons[i]);
         }
 
+        buttons[0].setToolTipText("Create new Map");
+        buttons[1].setToolTipText("Save Map");
+        buttons[2].setToolTipText("Open existing Map");
+        buttons[3].setToolTipText("Open Tileset");
+        buttons[4].setToolTipText("Edit Layer 3");
+        buttons[5].setToolTipText("Edit Layer 2");
+        buttons[6].setToolTipText("Edit Layer 1");
+        buttons[7].setToolTipText("Edit Collision Map");
+        buttons[8].setToolTipText("Settings");
+
+
         setButtonActive(4);
 
         reset = new JButton("Reset");
@@ -95,6 +136,7 @@ public class Gui {
         reset.addMouseListener(new MouseHandler());
         reset.setFocusPainted(false);
         reset.setVisible(true);
+        reset.setToolTipText("Reset Map position & size");
         jfMain.add(reset);
 
 
