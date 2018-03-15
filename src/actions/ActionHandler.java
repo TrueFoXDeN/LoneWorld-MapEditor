@@ -60,7 +60,12 @@ public class ActionHandler implements ActionListener {
         if (e.getSource().equals(Gui.oktileset)) {
             if (!Gui.inputTileset.getText().equals("0")) {
                 try {
-                    Tiles.anzahl = Integer.parseInt(Gui.inputTileset.getText());
+                    String anz = Gui.inputTileset.getText();
+                    while (anz.endsWith("\t")) {
+                        anz = anz.substring(0, anz.length() - 1);
+                    }
+
+                    Tiles.anzahl = Integer.parseInt(anz);
                     Tiles.active = 1;
                     IL.setupTextures();
                     Tiles.create();
@@ -83,9 +88,30 @@ public class ActionHandler implements ActionListener {
                 if (!Gui.inputNew[0].getText().equals("0") && !Gui.inputNew[1].getText().equals("0") &&
                         !Gui.inputNew[2].getText().equals("0")) {
 
-                    Map.kachelGroesse = Integer.parseInt(Gui.inputNew[0].getText());
-                    Map.kachelnX = Integer.parseInt(Gui.inputNew[1].getText()) - 1;
-                    Map.kachelnY = Integer.parseInt(Gui.inputNew[2].getText()) - 1;
+                    String s1 = Gui.inputNew[0].getText().trim();
+
+                    while (s1.endsWith("\t")) {
+                        s1 = s1.substring(0, s1.length() - 1);
+                    }
+                    Gui.inputNew[0].setText(s1);
+
+                    String s2 = Gui.inputNew[1].getText().trim();
+
+                    while (s2.endsWith("\t")) {
+                        s2 = s2.substring(0, s2.length() - 1);
+                    }
+                    Gui.inputNew[1].setText(s2);
+
+                    String s3 = Gui.inputNew[2].getText().trim();
+
+                    while (s3.endsWith("\t")) {
+                        s3 = s3.substring(0, s3.length() - 1);
+                    }
+                    Gui.inputNew[2].setText(s3);
+
+                    Map.kachelGroesse = Integer.parseInt(s1);
+                    Map.kachelnX = Integer.parseInt(s2) - 1;
+                    Map.kachelnY = Integer.parseInt(s3) - 1;
 
                     Map.kachelGroesseCurrent = Map.kachelGroesse;
                     Map.collision.clear();
@@ -104,12 +130,12 @@ public class ActionHandler implements ActionListener {
         //Tiles
         try {
             for (int i = 0; i < Tiles.tiles.length; i++) {
-                if(e.getSource().equals(Tiles.tiles[i])){
-                    Tiles.active = i+1;
-                    for(int j = 0; j<Tiles.tiles.length; j++){
+                if (e.getSource().equals(Tiles.tiles[i])) {
+                    Tiles.active = i + 1;
+                    for (int j = 0; j < Tiles.tiles.length; j++) {
                         Tiles.tiles[j].setBorder(Gui.border);
                     }
-                    Tiles.tiles[Tiles.active-1].setBorder(Gui.borderActive);
+                    Tiles.tiles[Tiles.active - 1].setBorder(Gui.borderActive);
 
                 }
             }

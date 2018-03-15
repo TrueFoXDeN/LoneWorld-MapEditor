@@ -2,7 +2,9 @@ package gui;
 
 import actions.*;
 import data.C;
+import data.Tiles;
 import draw.Draw;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -78,7 +80,7 @@ public class Gui {
         checkGridVisible = new JCheckBox();
         checkGridVisible.setSelected(true);
         checkGridVisible.setVisible(true);
-        checkGridVisible.setBounds(105, 112, 20,20);
+        checkGridVisible.setBounds(105, 112, 20, 20);
         jfSettings.add(checkGridVisible);
 
         oksettings = new JButton("Ok");
@@ -115,17 +117,17 @@ public class Gui {
         jfTileset.add(opentileset);
 
         JLabel lblTileset = new JLabel("Anzahl Bilder:");
-        lblTileset.setBounds(10,22,250,20);
+        lblTileset.setBounds(10, 22, 250, 20);
         lblTileset.setVisible(true);
         jfTileset.add(lblTileset);
 
-        inputTileset = new JTextArea();
-        inputTileset.setBounds(125,25,75,20);
+        inputTileset = new JTextArea(String.valueOf(Tiles.anzahl));
+        inputTileset.setBounds(125, 25, 75, 20);
         inputTileset.setVisible(true);
         jfTileset.add(inputTileset);
 
-        scroll = new JScrollBar(JScrollBar.VERTICAL, 0,10,0,400);
-        scroll.setBounds(getWidth()-20,getHeight()-200,20,200);
+        scroll = new JScrollBar(JScrollBar.VERTICAL, 0, 10, 0, 400);
+        scroll.setBounds(getWidth() - 20, getHeight() - 200, 20, 200);
         scroll.addAdjustmentListener(new AdjustHandler());
         scroll.setVisible(true);
 
