@@ -72,15 +72,27 @@ public class Gui {
             jfSettings.add(lblSettings[i]);
         }
 
-        lblSettings[0].setText("Map bewegen:    Rechtsklick");
-        lblSettings[1].setText("Zeichnen:            Linksklick");
-        lblSettings[2].setText("Löschen:             Shift + Linksklick");
-        lblSettings[3].setText("Grid sichtbar:");
+        JLabel[] lblSettings2 = new JLabel[3];
+        for (int i = 0; i < lblSettings2.length; i++) {
+            lblSettings2[i] = new JLabel();
+            lblSettings2[i].setBounds(105, 22 + i * 30, 250, 20);
+            lblSettings2[i].setVisible(true);
+            jfSettings.add(lblSettings2[i]);
+        }
+
+        lblSettings2[0].setText("Rightclick");
+        lblSettings2[1].setText("Leftclick");
+        lblSettings2[2].setText("Shift + Leftclick");
+
+        lblSettings[0].setText("Move Map:");
+        lblSettings[1].setText("Draw Tile:");
+        lblSettings[2].setText("Delete Tile:");
+        lblSettings[3].setText("Show Grid:");
 
         checkGridVisible = new JCheckBox();
         checkGridVisible.setSelected(true);
         checkGridVisible.setVisible(true);
-        checkGridVisible.setBounds(105, 112, 20, 20);
+        checkGridVisible.setBounds(102, 112, 20, 20);
         jfSettings.add(checkGridVisible);
 
         oksettings = new JButton("Ok");
@@ -116,7 +128,7 @@ public class Gui {
         opentileset.setVisible(true);
         jfTileset.add(opentileset);
 
-        JLabel lblTileset = new JLabel("Anzahl Bilder:");
+        JLabel lblTileset = new JLabel("Tile Count:");
         lblTileset.setBounds(10, 22, 250, 20);
         lblTileset.setVisible(true);
         jfTileset.add(lblTileset);
@@ -145,9 +157,9 @@ public class Gui {
             lblNew[i].setVisible(true);
             jfNew.add(lblNew[i]);
         }
-        lblNew[0].setText("Kachelgöße");
-        lblNew[1].setText("Anzahl x:");
-        lblNew[2].setText("Anzahl y:");
+        lblNew[0].setText("Tile Size:");
+        lblNew[1].setText("Tiles x:");
+        lblNew[2].setText("Tiles y:");
 
         JLabel lblNewPx = new JLabel("px");
         lblNewPx.setBounds(210, 22, 75, 20);
