@@ -19,8 +19,8 @@ public class Mouse {
         int x1 = (x - Map.x) / Map.kachelGroesseCurrent;
         int y1 = (y - Map.y) / Map.kachelGroesseCurrent;
 
-        if (x1 > Map.kachelnX) x1 = Map.kachelnX - 1;
-        if (y1 > Map.kachelnY) y1 = Map.kachelnY - 1;
+        if (x1 > Map.kachelnX) x1 = Map.kachelnX;
+        if (y1 > Map.kachelnY) y1 = Map.kachelnY;
 
         pos.x = x1;
         pos.y = y1;

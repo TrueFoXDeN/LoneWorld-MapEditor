@@ -19,34 +19,51 @@ public class Draw extends JLabel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 
 
-        if(Map.mapActive){
+        if (Map.mapActive) {
+
+            //DrawCollision
+            if (Gui.activeButton == 7) {
+                for (Point p : Map.collision) {
+                    g.drawImage(IL.collision, Mouse.posXToCood(p.x), Mouse.posYToCood(p.y),
+                            Map.kachelGroesseCurrent, Map.kachelGroesseCurrent, null);
+
+                }
+            }
+
             //DrawHover
-            if(Mouse.insideMap){
+            if (Mouse.insideMap) {
                 g.setColor(C.mapHover);
                 g.fillRect(Mouse.coord.x, Mouse.coord.y, Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
             }
 
-            if(Gui.activeButton == 7){
-                for(Point p: Map.collision){
-                     g.drawImage(IL.collision, Mouse.posXToCood(p.x), Mouse.posYToCood(p.y),
-                             Map.kachelGroesseCurrent, Map.kachelGroesseCurrent, null);
-
-                }
-            }
-
             //DrawGrid
             g.setColor(Color.GRAY);
-            for (int x = 0; x <= Map.kachelnX; x++) {
-                for (int y = 0; y <= Map.kachelnY; y++) {
-                    g.drawRect(x * Map.kachelGroesseCurrent + Map.x,
-                            y * Map.kachelGroesseCurrent + Map.y, Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
+            if(Map.gridVisible){
+                for (int x = 0; x <= Map.kachelnX; x++) {
+                    for (int y = 0; y <= Map.kachelnY; y++) {
+                        g.drawRect(x * Map.kachelGroesseCurrent + Map.x,
+                                y * Map.kachelGroesseCurrent + Map.y, Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
+                    }
                 }
-            }
+            }else{
+                g.drawRect(Map.x, Map.y, Map.kachelGroesseCurrent * Map.kachelnX +Map.kachelGroesseCurrent,
+                        Map.kachelGroesseCurrent * Map.kachelnY +Map.kachelGroesseCurrent);
 
+            }
         }
+
+        //DrawTileScreen
+        g.setColor(C.background);
+        g.fillRect(gui.getWidth()-200,gui.getHeight()-200, 200,200);
+
+        g.setColor(C.border);
+        g.drawRect(gui.getWidth()-200,gui.getHeight()-200, 200,200);
 
         g.setColor(C.background);
         g.fillRect(0, 0, gui.getWidth(), 75);
+
+        g.setColor(C.border);
+        g.drawLine(0,75,gui.getWidth(),75);
 
         repaint();
     }

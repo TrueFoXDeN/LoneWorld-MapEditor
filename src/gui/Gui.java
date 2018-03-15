@@ -1,12 +1,8 @@
 package gui;
 
-import actions.ActionHandler;
-import actions.MouseHandler;
-import actions.MouseMotionHandler;
-import actions.ScrollHandler;
+import actions.*;
 import data.C;
 import draw.Draw;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -14,16 +10,22 @@ import java.awt.*;
 
 public class Gui {
 
-    static public JFrame jfNew, jfMain, jfSettings;
+    public static Draw d;
+
+    static public JFrame jfNew, jfMain, jfSettings, jfTileset;
     public static JButton[] buttons = new JButton[9];
-    public static JButton reset, create, oksettings;
+    public static JButton reset, create, oksettings, oktileset, opentileset;
 
     public static JTextArea[] inputNew = new JTextArea[3];
+    public static JTextArea inputTileset;
     public static JLabel[] lblNew = new JLabel[3];
 
+    public static JScrollBar scroll;
 
-    private Border border = BorderFactory.createLineBorder(Color.BLACK);
-    private Border borderActive = BorderFactory.createLineBorder(Color.RED);
+    public static JCheckBox checkGridVisible;
+
+    public static Border border = BorderFactory.createLineBorder(Color.BLACK);
+    public static Border borderActive = BorderFactory.createLineBorder(Color.RED);
 
     public static int activeButton = 0;
 
@@ -39,13 +41,19 @@ public class Gui {
         jfMain.setResizable(false);
         jfMain.setLayout(null);
 
-
         jfNew = new JFrame("New");
         jfNew.setSize(300, 225);
         jfNew.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         jfNew.setLocationRelativeTo(null);
         jfNew.setResizable(false);
         jfNew.setLayout(null);
+
+        jfTileset = new JFrame("Tileset");
+        jfTileset.setSize(300, 225);
+        jfTileset.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        jfTileset.setLocationRelativeTo(null);
+        jfTileset.setResizable(false);
+        jfTileset.setLayout(null);
 
         jfSettings = new JFrame("Settings");
         jfSettings.setSize(300, 225);
@@ -54,10 +62,10 @@ public class Gui {
         jfSettings.setResizable(false);
         jfSettings.setLayout(null);
 
-        JLabel[] lblSettings = new JLabel[3];
+        JLabel[] lblSettings = new JLabel[4];
         for (int i = 0; i < lblSettings.length; i++) {
             lblSettings[i] = new JLabel();
-            lblSettings[i].setBounds(10, 20 +i*30, 250, 20);
+            lblSettings[i].setBounds(10, 22 + i * 30, 250, 20);
             lblSettings[i].setVisible(true);
             jfSettings.add(lblSettings[i]);
         }
@@ -65,6 +73,13 @@ public class Gui {
         lblSettings[0].setText("Map bewegen:    Rechtsklick");
         lblSettings[1].setText("Zeichnen:            Linksklick");
         lblSettings[2].setText("Löschen:             Shift + Linksklick");
+        lblSettings[3].setText("Grid sichtbar:");
+
+        checkGridVisible = new JCheckBox();
+        checkGridVisible.setSelected(true);
+        checkGridVisible.setVisible(true);
+        checkGridVisible.setBounds(105, 112, 20,20);
+        jfSettings.add(checkGridVisible);
 
         oksettings = new JButton("Ok");
         oksettings.setBounds(200, 150, 75, 25);
@@ -77,6 +92,44 @@ public class Gui {
         oksettings.setVisible(true);
         jfSettings.add(oksettings);
 
+        oktileset = new JButton("Ok");
+        oktileset.setBounds(200, 150, 75, 25);
+        oktileset.setBackground(C.buttonFill);
+        oktileset.setBorder(border);
+        oktileset.setBorderPainted(true);
+        oktileset.addActionListener(new ActionHandler());
+        oktileset.addMouseListener(new MouseHandler());
+        oktileset.setFocusPainted(false);
+        oktileset.setVisible(true);
+        jfTileset.add(oktileset);
+
+        opentileset = new JButton("Tileset Ordner");
+        opentileset.setBounds(10, 75, 125, 25);
+        opentileset.setBackground(C.buttonFill);
+        opentileset.setBorder(border);
+        opentileset.setBorderPainted(true);
+        opentileset.addActionListener(new ActionHandler());
+        opentileset.addMouseListener(new MouseHandler());
+        opentileset.setFocusPainted(false);
+        opentileset.setVisible(true);
+        jfTileset.add(opentileset);
+
+        JLabel lblTileset = new JLabel("Anzahl Bilder:");
+        lblTileset.setBounds(10,22,250,20);
+        lblTileset.setVisible(true);
+        jfTileset.add(lblTileset);
+
+        inputTileset = new JTextArea();
+        inputTileset.setBounds(125,25,75,20);
+        inputTileset.setVisible(true);
+        jfTileset.add(inputTileset);
+
+        scroll = new JScrollBar(JScrollBar.VERTICAL, 0,10,0,400);
+        scroll.setBounds(getWidth()-20,getHeight()-200,20,200);
+        scroll.addAdjustmentListener(new AdjustHandler());
+        scroll.setVisible(true);
+
+
         for (int i = 0; i < inputNew.length; i++) {
             inputNew[i] = new JTextArea();
             inputNew[i].setBounds(125, 25 + i * 40, 75, 20);
@@ -84,10 +137,9 @@ public class Gui {
             jfNew.add(inputNew[i]);
         }
 
-
         for (int i = 0; i < lblNew.length; i++) {
             lblNew[i] = new JLabel();
-            lblNew[i].setBounds(20, 25 + i * 40, 75, 20);
+            lblNew[i].setBounds(20, 22 + i * 40, 75, 20);
             lblNew[i].setVisible(true);
             jfNew.add(lblNew[i]);
         }
@@ -96,7 +148,7 @@ public class Gui {
         lblNew[2].setText("Anzahl y:");
 
         JLabel lblNewPx = new JLabel("px");
-        lblNewPx.setBounds(210, 25, 75, 20);
+        lblNewPx.setBounds(210, 22, 75, 20);
         lblNewPx.setVisible(true);
         jfNew.add(lblNewPx);
 
@@ -152,7 +204,7 @@ public class Gui {
         jfNew.add(create);
 
 
-        Draw d = new Draw();
+        d = new Draw();
         d.setSize(getWidth(), getHeight());
         d.setVisible(true);
         d.requestFocus();
@@ -161,6 +213,7 @@ public class Gui {
         d.addMouseMotionListener(new MouseMotionHandler());
         jfMain.add(d);
 
+        d.add(scroll);
 
         jfMain.requestFocus();
         jfMain.setVisible(true);

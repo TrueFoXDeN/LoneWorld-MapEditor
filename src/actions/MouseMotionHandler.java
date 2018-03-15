@@ -16,17 +16,26 @@ public class MouseMotionHandler implements MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
         if (Map.mapActive) {
 
+
             if (SwingUtilities.isRightMouseButton(e)) {
-                Map.move(e.getX() - startX, e.getY() - startY);
-                startX = e.getX();
-                startY = e.getY();
+                if (startY >= 75) {
+                    Map.move(e.getX() - startX, e.getY() - startY);
+                    startX = e.getX();
+                    startY = e.getY();
+                }
+
             }
 
-            Mouse.coordToPos(e.getX(), e.getY());
-            Mouse.posToCoord(Mouse.pos.x, Mouse.pos.y);
+            Mouse.insideMap(e.getX(), e.getY());
+            if (Mouse.insideMap) {
+                Mouse.coordToPos(e.getX(), e.getY());
+                Mouse.posToCoord(Mouse.pos.x, Mouse.pos.y);
+            }
+
+
         }
 
-        if(SwingUtilities.isLeftMouseButton(e)){
+        if (SwingUtilities.isLeftMouseButton(e)) {
             if (Map.mapActive) {
                 Map.addCollision(e);
                 Map.removeCollision(e);
@@ -39,6 +48,7 @@ public class MouseMotionHandler implements MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
 
         if (Map.mapActive) {
+
             Mouse.insideMap(e.getX(), e.getY());
             if (Mouse.insideMap) {
                 Mouse.coordToPos(e.getX(), e.getY());

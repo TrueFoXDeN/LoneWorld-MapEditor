@@ -9,10 +9,25 @@ import java.util.ArrayList;
 public class Map {
 
     public static int x = 25, y = 100;
-    public static boolean mapActive = false;
+    public static boolean mapActive = false, gridVisible = true;
     public static int kachelnX, kachelnY, kachelGroesse, kachelGroesseCurrent;
 
     public static ArrayList<Point> collision = new ArrayList<>();
+    public static int[][] layer1, layer2, layer3;
+
+    public static void setup() {
+        layer1 = new int[kachelnX][kachelnY];
+        layer2 = new int[kachelnX][kachelnY];
+        layer3 = new int[kachelnX][kachelnY];
+
+        for (int i = 0; i < kachelnX; i++) {
+            for (int j = 0; j < kachelnY; j++) {
+                layer1[i][j] = 0;
+                layer2[i][j] = 0;
+                layer3[i][j] = 0;
+            }
+        }
+    }
 
     public static void reset() {
         x = 25;
@@ -30,7 +45,7 @@ public class Map {
     }
 
     public static void addCollision(MouseEvent e) {
-
+        if (Mouse.insideMap) {
             if (Gui.activeButton == 7) {
                 if (e.getY() >= 75) {
                     if (!collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
@@ -39,11 +54,11 @@ public class Map {
 
                 }
             }
-
+        }
     }
 
     public static void removeCollision(MouseEvent e) {
-
+        if (Mouse.insideMap) {
             if (Gui.activeButton == 7) {
                 if (e.getY() >= 75) {
                     if (e.isShiftDown()) {
@@ -54,8 +69,6 @@ public class Map {
                     }
                 }
             }
-
-
+        }
     }
-
 }

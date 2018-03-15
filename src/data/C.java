@@ -9,4 +9,5 @@ public class C {
     public static final Color background = Color.decode("0xccd6de");
 
     public static final Color mapHover = new Color(103,235,169,100);
+    public static final Color border = Color.decode("0x8b99a3");
 }

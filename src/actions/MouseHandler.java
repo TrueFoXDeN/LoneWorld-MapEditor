@@ -2,11 +2,9 @@ package actions;
 
 import data.C;
 import data.Map;
-import data.Mouse;
 import gui.Gui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,16 +19,14 @@ public class MouseHandler implements MouseListener {
     public void mousePressed(MouseEvent e) {
 
         if (SwingUtilities.isRightMouseButton(e)) {
-            if(Map.mapActive){
-                 if (e.getY() >= 75) {
-                    MouseMotionHandler.startX = e.getX();
-                    MouseMotionHandler.startY = e.getY();
-                }
+            if (Map.mapActive) {
+                MouseMotionHandler.startX = e.getX();
+                MouseMotionHandler.startY = e.getY();
             }
 
         }
 
-        if(SwingUtilities.isLeftMouseButton(e)){
+        if (SwingUtilities.isLeftMouseButton(e)) {
             if (Map.mapActive) {
                 Map.addCollision(e);
                 Map.removeCollision(e);
@@ -57,7 +53,15 @@ public class MouseHandler implements MouseListener {
         if (e.getSource().equals(Gui.create)) {
             Gui.create.setBackground(C.buttonHover);
         }
-
+        if (e.getSource().equals(Gui.oksettings)) {
+            Gui.oksettings.setBackground(C.buttonHover);
+        }
+        if (e.getSource().equals(Gui.oktileset)) {
+            Gui.oktileset.setBackground(C.buttonHover);
+        }
+        if (e.getSource().equals(Gui.opentileset)) {
+            Gui.opentileset.setBackground(C.buttonHover);
+        }
 
     }
 
@@ -74,6 +78,14 @@ public class MouseHandler implements MouseListener {
         if (e.getSource().equals(Gui.create)) {
             Gui.create.setBackground(C.buttonFill);
         }
-
+        if (e.getSource().equals(Gui.oksettings)) {
+            Gui.oksettings.setBackground(C.buttonFill);
+        }
+        if (e.getSource().equals(Gui.oktileset)) {
+            Gui.oktileset.setBackground(C.buttonFill);
+        }
+        if (e.getSource().equals(Gui.opentileset)) {
+            Gui.opentileset.setBackground(C.buttonFill);
+        }
     }
 }
