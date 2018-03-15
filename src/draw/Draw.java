@@ -20,13 +20,20 @@ public class Draw extends JLabel {
 
 
         if (Map.mapActive) {
-
+            g.setColor(C.layerInactive);
             //DrawTiles
             for (int x = 0; x < Map.layer1.length; x++) {
                 for (int y = 0; y < Map.layer1[x].length; y++) {
                     if (Map.layer1[x][y] > 0) {
                         g.drawImage(IL.texture[Map.layer1[x][y] - 1], Mouse.posXToCood(x), Mouse.posYToCood(y),
                                 Map.kachelGroesseCurrent, Map.kachelGroesseCurrent, null);
+
+                        if (Map.layerHighlight) {
+                            if (Gui.activeButton != 4) {
+                                g.fillRect(Mouse.posXToCood(x), Mouse.posYToCood(y),
+                                        Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
+                            }
+                        }
                     }
                 }
             }
@@ -36,6 +43,13 @@ public class Draw extends JLabel {
                     if (Map.layer2[x][y] > 0) {
                         g.drawImage(IL.texture[Map.layer2[x][y] - 1], Mouse.posXToCood(x), Mouse.posYToCood(y),
                                 Map.kachelGroesseCurrent, Map.kachelGroesseCurrent, null);
+
+                        if (Map.layerHighlight) {
+                            if (Gui.activeButton != 5) {
+                                g.fillRect(Mouse.posXToCood(x), Mouse.posYToCood(y),
+                                        Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
+                            }
+                        }
                     }
                 }
             }
@@ -45,6 +59,13 @@ public class Draw extends JLabel {
                     if (Map.layer3[x][y] > 0) {
                         g.drawImage(IL.texture[Map.layer3[x][y] - 1], Mouse.posXToCood(x), Mouse.posYToCood(y),
                                 Map.kachelGroesseCurrent, Map.kachelGroesseCurrent, null);
+
+                        if (Map.layerHighlight) {
+                            if (Gui.activeButton != 6) {
+                                g.fillRect(Mouse.posXToCood(x), Mouse.posYToCood(y),
+                                        Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
+                            }
+                        }
                     }
                 }
             }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Map {
 
     public static int x = 25, y = 100;
-    public static boolean mapActive = false, gridVisible = true;
+    public static boolean mapActive = false, gridVisible = true, layerHighlight = true;
     public static int kachelnX, kachelnY, kachelGroesse, kachelGroesseCurrent;
 
     public static ArrayList<Point> collision = new ArrayList<>();

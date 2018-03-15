@@ -24,7 +24,7 @@ public class Gui {
 
     public static JScrollBar scroll;
 
-    public static JCheckBox checkGridVisible;
+    public static JCheckBox checkGridVisible, checkLayerHighlight;
 
     public static Border border = BorderFactory.createLineBorder(Color.BLACK);
     public static Border borderActive = BorderFactory.createLineBorder(Color.RED);
@@ -64,7 +64,7 @@ public class Gui {
         jfSettings.setResizable(false);
         jfSettings.setLayout(null);
 
-        JLabel[] lblSettings = new JLabel[4];
+        JLabel[] lblSettings = new JLabel[5];
         for (int i = 0; i < lblSettings.length; i++) {
             lblSettings[i] = new JLabel();
             lblSettings[i].setBounds(10, 22 + i * 30, 250, 20);
@@ -88,12 +88,19 @@ public class Gui {
         lblSettings[1].setText("Draw Tile:");
         lblSettings[2].setText("Delete Tile:");
         lblSettings[3].setText("Show Grid:");
+        lblSettings[4].setText("Layer Highlight:");
 
         checkGridVisible = new JCheckBox();
         checkGridVisible.setSelected(true);
         checkGridVisible.setVisible(true);
         checkGridVisible.setBounds(102, 112, 20, 20);
         jfSettings.add(checkGridVisible);
+
+        checkLayerHighlight = new JCheckBox();
+        checkLayerHighlight.setSelected(true);
+        checkLayerHighlight.setVisible(true);
+        checkLayerHighlight.setBounds(102, 143, 20, 20);
+        jfSettings.add(checkLayerHighlight);
 
         oksettings = new JButton("Ok");
         oksettings.setBounds(200, 150, 75, 25);

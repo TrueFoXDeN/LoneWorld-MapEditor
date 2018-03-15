@@ -79,6 +79,7 @@ public class ActionHandler implements ActionListener {
 
         if (e.getSource().equals(Gui.oksettings)) {
             Map.gridVisible = Gui.checkGridVisible.isSelected();
+            Map.layerHighlight = Gui.checkLayerHighlight.isSelected();
             Gui.jfSettings.setVisible(false);
         }
 
