@@ -1,7 +1,5 @@
 package data;
 
-import gui.Gui;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -36,7 +34,13 @@ public class Map {
     }
 
     public static void scroll(int dir) {
-        if (mapActive) kachelGroesseCurrent -= dir;
+        if (mapActive){
+            if(kachelGroesseCurrent >= 2){
+                kachelGroesseCurrent -= dir;
+            }else{
+                kachelGroesseCurrent = 2;
+            }
+        }
     }
 
     public static void move(int x, int y) {
