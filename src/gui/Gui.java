@@ -154,6 +154,7 @@ public class Gui {
         for (int i = 0; i < inputNew.length; i++) {
             inputNew[i] = new JTextArea();
             inputNew[i].setBounds(125, 25 + i * 40, 75, 20);
+            inputNew[i].addKeyListener(new KeyHandler());
             inputNew[i].setVisible(true);
             jfNew.add(inputNew[i]);
         }
