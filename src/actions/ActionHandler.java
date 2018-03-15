@@ -1,5 +1,6 @@
 package actions;
 
+import data.IO;
 import data.Map;
 import data.Tiles;
 import draw.IL;
@@ -26,6 +27,12 @@ public class ActionHandler implements ActionListener {
                 switch (i) {
                     case 0:
                         Gui.jfNew.setVisible(true);
+                        break;
+                    case 1:
+                        IO.safe();
+                        break;
+                    case 2:
+                        IO.load();
                         break;
                     case 3:
                         Gui.jfTileset.setVisible(true);
