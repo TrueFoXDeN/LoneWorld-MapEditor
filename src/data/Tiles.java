@@ -10,15 +10,15 @@ public class Tiles {
 
     private static Gui gui = new Gui();
 
-    public static int active = 0, anzahl = 14, scroll = 0, oldVal;
+    public static int active = 1, anzahl = 14, scroll = 0, oldVal;
 
     public static JButton[] tiles;
 
     public static void create() {
 
         try {
-            for (int i = 0; i < tiles.length; i++) {
-                Gui.d.remove(tiles[i]);
+            for (JButton t : tiles) {
+                Gui.d.remove(t);
             }
         } catch (Exception e) {
 
@@ -51,19 +51,19 @@ public class Tiles {
 
         }
 
-        tiles[active].setBorder(Gui.borderActive);
+        tiles[active-1].setBorder(Gui.borderActive);
 
     }
 
     public static void move(int oldVal) {
 
-        for (int i = 0; i < tiles.length; i++) {
-            tiles[i].setBounds(tiles[i].getBounds().x, tiles[i].getBounds().y - scroll, tiles[i].getBounds().width,
-                    tiles[i].getBounds().height);
-            if(tiles[i].getBounds().y < gui.getHeight() - 200){
-                tiles[i].setVisible(false);
-            }else{
-                tiles[i].setVisible(true);
+        for (JButton t : tiles) {
+            t.setBounds(t.getBounds().x, t.getBounds().y - scroll, t.getBounds().width, t.getBounds().height);
+
+            if (t.getBounds().y < gui.getHeight() - 200) {
+                t.setVisible(false);
+            } else {
+                t.setVisible(true);
             }
         }
         scroll = 0;

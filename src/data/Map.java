@@ -16,9 +16,9 @@ public class Map {
     public static int[][] layer1, layer2, layer3;
 
     public static void setup() {
-        layer1 = new int[kachelnX][kachelnY];
-        layer2 = new int[kachelnX][kachelnY];
-        layer3 = new int[kachelnX][kachelnY];
+        layer1 = new int[kachelnX + 1][kachelnY + 1];
+        layer2 = new int[kachelnX + 1][kachelnY + 1];
+        layer3 = new int[kachelnX + 1][kachelnY + 1];
 
         for (int i = 0; i < kachelnX; i++) {
             for (int j = 0; j < kachelnY; j++) {
@@ -46,12 +46,9 @@ public class Map {
 
     public static void addCollision(MouseEvent e) {
         if (Mouse.insideMap) {
-            if (Gui.activeButton == 7) {
-                if (e.getY() >= 75) {
-                    if (!collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
-                        collision.add(new Point(Mouse.pos.x, Mouse.pos.y));
-                    }
-
+            if (e.getY() >= 75) {
+                if (!collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
+                    collision.add(new Point(Mouse.pos.x, Mouse.pos.y));
                 }
             }
         }
@@ -59,16 +56,62 @@ public class Map {
 
     public static void removeCollision(MouseEvent e) {
         if (Mouse.insideMap) {
-            if (Gui.activeButton == 7) {
-                if (e.getY() >= 75) {
-                    if (e.isShiftDown()) {
-                        if (collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
-                            collision.remove(new Point(Mouse.pos.x, Mouse.pos.y));
-                        }
-
+            if (e.getY() >= 75) {
+                if (e.isShiftDown()) {
+                    if (collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
+                        collision.remove(new Point(Mouse.pos.x, Mouse.pos.y));
                     }
+
                 }
             }
         }
     }
+
+    public static void addTile(MouseEvent e, int layer) {
+        if (Mouse.insideMap) {
+            if (e.getY() >= 75) {
+                try {
+                    if (layer == 0) {
+                        layer1[Mouse.pos.x][Mouse.pos.y] = Tiles.active;
+                    }
+                    if (layer == 1) {
+                        layer2[Mouse.pos.x][Mouse.pos.y] = Tiles.active;
+                    }
+                    if (layer == 2) {
+                        layer3[Mouse.pos.x][Mouse.pos.y] = Tiles.active;
+                    }
+
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+
+                }
+            }
+        }
+    }
+
+    public static void removeTile(MouseEvent e, int layer) {
+        if (Mouse.insideMap) {
+            if (e.getY() >= 75) {
+                if (e.isShiftDown()) {
+                    try {
+                        if (layer == 0) {
+                            layer1[Mouse.pos.x][Mouse.pos.y] = 0;
+                        }
+                        if (layer == 1) {
+                            layer2[Mouse.pos.x][Mouse.pos.y] = 0;
+                        }
+                        if (layer == 2) {
+                            layer3[Mouse.pos.x][Mouse.pos.y] = 0;
+                        }
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+
+                    }
+                }
+
+            }
+        }
+    }
+
+
 }

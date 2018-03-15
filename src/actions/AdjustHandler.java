@@ -12,9 +12,9 @@ public class AdjustHandler implements AdjustmentListener {
     public void adjustmentValueChanged(AdjustmentEvent e) {
 
         if (e.getValue() > Tiles.oldVal) {
-            Tiles.scroll += e.getValue()-Tiles.oldVal;
-        } else{
-            Tiles.scroll -= Tiles.oldVal -e.getValue();
+            Tiles.scroll += e.getValue() - Tiles.oldVal;
+        } else {
+            Tiles.scroll -= Tiles.oldVal - e.getValue();
         }
 
         Tiles.move(e.getValue());

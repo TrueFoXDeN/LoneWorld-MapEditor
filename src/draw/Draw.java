@@ -21,6 +21,34 @@ public class Draw extends JLabel {
 
         if (Map.mapActive) {
 
+            //DrawTiles
+            for (int x = 0; x < Map.layer1.length; x++) {
+                for (int y = 0; y < Map.layer1[x].length; y++) {
+                    if (Map.layer1[x][y] > 0) {
+                        g.drawImage(IL.texture[Map.layer1[x][y] - 1], Mouse.posXToCood(x), Mouse.posYToCood(y),
+                                Map.kachelGroesseCurrent, Map.kachelGroesseCurrent, null);
+                    }
+                }
+            }
+
+            for (int x = 0; x < Map.layer2.length; x++) {
+                for (int y = 0; y < Map.layer2[x].length; y++) {
+                    if (Map.layer2[x][y] > 0) {
+                        g.drawImage(IL.texture[Map.layer2[x][y] - 1], Mouse.posXToCood(x), Mouse.posYToCood(y),
+                                Map.kachelGroesseCurrent, Map.kachelGroesseCurrent, null);
+                    }
+                }
+            }
+
+            for (int x = 0; x < Map.layer3.length; x++) {
+                for (int y = 0; y < Map.layer3[x].length; y++) {
+                    if (Map.layer3[x][y] > 0) {
+                        g.drawImage(IL.texture[Map.layer3[x][y] - 1], Mouse.posXToCood(x), Mouse.posYToCood(y),
+                                Map.kachelGroesseCurrent, Map.kachelGroesseCurrent, null);
+                    }
+                }
+            }
+
             //DrawCollision
             if (Gui.activeButton == 7) {
                 for (Point p : Map.collision) {
@@ -38,32 +66,32 @@ public class Draw extends JLabel {
 
             //DrawGrid
             g.setColor(Color.GRAY);
-            if(Map.gridVisible){
+            if (Map.gridVisible) {
                 for (int x = 0; x <= Map.kachelnX; x++) {
                     for (int y = 0; y <= Map.kachelnY; y++) {
                         g.drawRect(x * Map.kachelGroesseCurrent + Map.x,
                                 y * Map.kachelGroesseCurrent + Map.y, Map.kachelGroesseCurrent, Map.kachelGroesseCurrent);
                     }
                 }
-            }else{
-                g.drawRect(Map.x, Map.y, Map.kachelGroesseCurrent * Map.kachelnX +Map.kachelGroesseCurrent,
-                        Map.kachelGroesseCurrent * Map.kachelnY +Map.kachelGroesseCurrent);
+            } else {
+                g.drawRect(Map.x, Map.y, Map.kachelGroesseCurrent * Map.kachelnX + Map.kachelGroesseCurrent,
+                        Map.kachelGroesseCurrent * Map.kachelnY + Map.kachelGroesseCurrent);
 
             }
         }
 
         //DrawTileScreen
         g.setColor(C.background);
-        g.fillRect(gui.getWidth()-200,gui.getHeight()-200, 200,200);
+        g.fillRect(gui.getWidth() - 200, gui.getHeight() - 200, 200, 200);
 
         g.setColor(C.border);
-        g.drawRect(gui.getWidth()-200,gui.getHeight()-200, 200,200);
+        g.drawRect(gui.getWidth() - 200, gui.getHeight() - 200, 200, 200);
 
         g.setColor(C.background);
         g.fillRect(0, 0, gui.getWidth(), 75);
 
         g.setColor(C.border);
-        g.drawLine(0,75,gui.getWidth(),75);
+        g.drawLine(0, 75, gui.getWidth(), 75);
 
         repaint();
     }

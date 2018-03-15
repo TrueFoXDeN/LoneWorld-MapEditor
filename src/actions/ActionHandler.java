@@ -2,6 +2,7 @@ package actions;
 
 import data.Map;
 import data.Tiles;
+import draw.IL;
 import gui.Gui;
 
 import java.awt.*;
@@ -53,7 +54,8 @@ public class ActionHandler implements ActionListener {
             if (!Gui.inputTileset.getText().equals("0")) {
                 try {
                     Tiles.anzahl = Integer.parseInt(Gui.inputTileset.getText());
-                    Tiles.active = 0;
+                    Tiles.active = 1;
+                    IL.setupTextures();
                     Tiles.create();
                     Gui.jfTileset.setVisible(false);
                 } catch (NumberFormatException e1) {
@@ -96,11 +98,12 @@ public class ActionHandler implements ActionListener {
         try {
             for (int i = 0; i < Tiles.tiles.length; i++) {
                 if(e.getSource().equals(Tiles.tiles[i])){
-                    Tiles.active = i;
+                    Tiles.active = i+1;
                     for(int j = 0; j<Tiles.tiles.length; j++){
                         Tiles.tiles[j].setBorder(Gui.border);
                     }
-                    Tiles.tiles[Tiles.active].setBorder(Gui.borderActive);
+                    Tiles.tiles[Tiles.active-1].setBorder(Gui.borderActive);
+
                 }
             }
 
