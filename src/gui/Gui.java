@@ -140,12 +140,12 @@ public class Gui {
         lblTileset.setVisible(true);
         jfTileset.add(lblTileset);
 
-        inputTileset = new JTextArea(String.valueOf(Tiles.anzahl + 1));
+        inputTileset = new JTextArea(String.valueOf(Tiles.anzahl));
         inputTileset.setBounds(125, 25, 75, 20);
         inputTileset.setVisible(true);
         jfTileset.add(inputTileset);
 
-        scroll = new JScrollBar(JScrollBar.VERTICAL, 0, 10, 0, 400);
+        scroll = new JScrollBar(JScrollBar.VERTICAL, 0, 400, 0, 400);
         scroll.setBounds(getWidth() - 20, getHeight() - 200, 20, 200);
         scroll.addAdjustmentListener(new AdjustHandler());
         scroll.setVisible(true);

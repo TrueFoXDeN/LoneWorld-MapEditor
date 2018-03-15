@@ -69,6 +69,11 @@ public class ActionHandler implements ActionListener {
                     Tiles.active = 1;
                     IL.setupTextures();
                     Tiles.create();
+
+                    if(Tiles.anzahl > 30){
+                        Gui.scroll.setVisibleAmount(10);
+                    }
+
                     Gui.jfTileset.setVisible(false);
                 } catch (NumberFormatException e1) {
                     System.out.println("Number input error");
