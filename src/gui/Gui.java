@@ -140,7 +140,7 @@ public class Gui {
         lblTileset.setVisible(true);
         jfTileset.add(lblTileset);
 
-        inputTileset = new JTextArea(String.valueOf(Tiles.anzahl));
+        inputTileset = new JTextArea(String.valueOf(Tiles.anzahl + 1));
         inputTileset.setBounds(125, 25, 75, 20);
         inputTileset.setVisible(true);
         jfTileset.add(inputTileset);

@@ -10,5 +10,5 @@ public class C {
 
     public static final Color mapHover = new Color(103,235,169,100);
     public static final Color border = Color.decode("0x8b99a3");
-    public static final Color layerInactive = new Color(255,255,255,65);
+    public static final Color layerInactive = new Color(255,255,255,45);
 }
