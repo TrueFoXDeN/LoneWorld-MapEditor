@@ -3,6 +3,7 @@ package draw;
 import data.C;
 import data.Map;
 import data.Mouse;
+import data.Tools;
 import gui.Gui;
 
 import javax.swing.*;
@@ -97,6 +98,19 @@ public class Draw extends JLabel {
             } else {
                 g.drawRect(Map.x, Map.y, Map.kachelGroesseCurrent * Map.kachelnX + Map.kachelGroesseCurrent,
                         Map.kachelGroesseCurrent * Map.kachelnY + Map.kachelGroesseCurrent);
+
+            }
+
+            //DrawRect
+            if (Tools.rectVisible) {
+                g.setColor(Color.RED);
+                int x = Math.min(Tools.start.x + Map.kachelGroesseCurrent / 2, Tools.end.x + Map.kachelGroesseCurrent / 2);
+                int y = Math.min(Tools.start.y + Map.kachelGroesseCurrent / 2, Tools.end.y + Map.kachelGroesseCurrent / 2);
+
+                int width = Math.abs(Tools.start.x - Tools.end.x);
+                int height = Math.abs(Tools.start.y - Tools.end.y);
+
+                g.drawRect(x, y, width, height);
 
             }
         }

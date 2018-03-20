@@ -21,14 +21,15 @@ public class IL {
         }
     }
 
-    public static void setupTextures(){
+    public static void setupTextures() {
 
         texture = new BufferedImage[Tiles.anzahl];
         for (int i = 0; i < texture.length; i++) {
             try {
-                texture[i] = ImageIO.read(new FileInputStream(new File("rsc/textures/" + (i+1) + ".png")));
+                texture[i] = ImageIO.read(new FileInputStream(new File("rsc/textures/" + (i + 1) + ".png")));
+                Tiles.anzahl = i;
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Tiles not found error");
             }
         }
     }

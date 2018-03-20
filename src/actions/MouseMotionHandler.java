@@ -2,9 +2,11 @@ package actions;
 
 import data.Map;
 import data.Mouse;
+import data.Tools;
 import gui.Gui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
@@ -29,27 +31,29 @@ public class MouseMotionHandler implements MouseMotionListener {
             if (Mouse.insideMap) {
                 Mouse.coordToPos(e.getX(), e.getY());
                 Mouse.posToCoord(Mouse.pos.x, Mouse.pos.y);
+
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    if(!SwingUtilities.isRightMouseButton(e)){
+                        if (Tools.active == 2) {
+                            Tools.end = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
+                        }
+                    }
+
+                }
+
             }
 
         }
 
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (Map.mapActive) {
-                if(Gui.activeButton == 7){
-                    Map.addCollision(e);
-                    Map.removeCollision(e);
-                }
-                else if(Gui.activeButton == 4){
-                    Map.addTile(e,0);
-                    Map.removeTile(e, 0);
-                }
-                else if(Gui.activeButton == 5){
-                    Map.addTile(e,1);
-                    Map.removeTile(e, 1);
-                }
-                else if(Gui.activeButton == 6){
-                    Map.addTile(e,2);
-                    Map.removeTile(e, 2);
+                if (Tools.active == 0) {
+                    if (Gui.activeButton == 7) {
+                        Map.addCollision(e);
+                        Map.removeCollision(e);
+                    }
+                    Map.setTile(e);
+
                 }
 
 

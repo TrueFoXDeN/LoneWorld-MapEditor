@@ -3,6 +3,7 @@ package actions;
 import data.IO;
 import data.Map;
 import data.Tiles;
+import data.Tools;
 import draw.IL;
 import gui.Gui;
 
@@ -70,7 +71,7 @@ public class ActionHandler implements ActionListener {
                     IL.setupTextures();
                     Tiles.create();
 
-                    if(Tiles.anzahl > 30){
+                    if (Tiles.anzahl > 30) {
                         Gui.scroll.setVisibleAmount(10);
                     }
 
@@ -131,6 +132,13 @@ public class ActionHandler implements ActionListener {
             }
 
 
+        }
+
+        //Tools
+        for (int i = 0; i < Gui.tools.length; i++) {
+            if(e.getSource().equals(Gui.tools[i])){
+                Tools.setActive(i);
+            }
         }
 
         //Tiles

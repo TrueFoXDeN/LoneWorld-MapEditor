@@ -24,7 +24,7 @@ public class Tiles {
 
         }
 
-        tiles = new JButton[anzahl];
+        tiles = new JButton[anzahl+1];
 
         int xversch = 0, yversch = 0;
         for (int i = 0; i < tiles.length; i++) {

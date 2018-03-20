@@ -1,5 +1,7 @@
 package data;
 
+import gui.Gui;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -34,10 +36,10 @@ public class Map {
     }
 
     public static void scroll(int dir) {
-        if (mapActive){
-            if(kachelGroesseCurrent >= 2){
+        if (mapActive) {
+            if (kachelGroesseCurrent >= 2) {
                 kachelGroesseCurrent -= dir;
-            }else{
+            } else {
                 kachelGroesseCurrent = 2;
             }
         }
@@ -50,68 +52,54 @@ public class Map {
 
     public static void addCollision(MouseEvent e) {
         if (Mouse.insideMap) {
-            if (e.getY() >= 75) {
-                if (!collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
-                    collision.add(new Point(Mouse.pos.x, Mouse.pos.y));
-                }
+            if (!collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
+                collision.add(new Point(Mouse.pos.x, Mouse.pos.y));
             }
         }
     }
 
     public static void removeCollision(MouseEvent e) {
         if (Mouse.insideMap) {
-            if (e.getY() >= 75) {
-                if (e.isShiftDown()) {
-                    if (collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
-                        collision.remove(new Point(Mouse.pos.x, Mouse.pos.y));
-                    }
-
+            if (e.isShiftDown()) {
+                if (collision.contains(new Point(Mouse.pos.x, Mouse.pos.y))) {
+                    collision.remove(new Point(Mouse.pos.x, Mouse.pos.y));
                 }
             }
         }
     }
 
-    public static void addTile(MouseEvent e, int layer) {
+    public static void setTile(MouseEvent e) {
         if (Mouse.insideMap) {
-            if (e.getY() >= 75) {
-                try {
-                    if (layer == 0) {
-                        layer1[Mouse.pos.x][Mouse.pos.y] = Tiles.active;
-                    }
-                    if (layer == 1) {
-                        layer2[Mouse.pos.x][Mouse.pos.y] = Tiles.active;
-                    }
-                    if (layer == 2) {
-                        layer3[Mouse.pos.x][Mouse.pos.y] = Tiles.active;
-                    }
 
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-
-                }
-            }
-        }
-    }
-
-    public static void removeTile(MouseEvent e, int layer) {
-        if (Mouse.insideMap) {
-            if (e.getY() >= 75) {
-                if (e.isShiftDown()) {
-                    try {
-                        if (layer == 0) {
+            try {
+                if (!e.isShiftDown()) {
+                    switch (Gui.activeButton) {
+                        case 4:
+                            layer1[Mouse.pos.x][Mouse.pos.y] = Tiles.active;
+                            break;
+                        case 5:
+                            layer2[Mouse.pos.x][Mouse.pos.y] = Tiles.active;
+                            break;
+                        case 6:
+                            layer3[Mouse.pos.x][Mouse.pos.y] = Tiles.active;
+                            break;
+                    }
+                } else {
+                    switch (Gui.activeButton) {
+                        case 4:
                             layer1[Mouse.pos.x][Mouse.pos.y] = 0;
-                        }
-                        if (layer == 1) {
+                            break;
+                        case 5:
                             layer2[Mouse.pos.x][Mouse.pos.y] = 0;
-                        }
-                        if (layer == 2) {
+                            break;
+                        case 6:
                             layer3[Mouse.pos.x][Mouse.pos.y] = 0;
-                        }
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-
+                            break;
                     }
                 }
+
+            } catch (Exception e1) {
+                e1.printStackTrace();
 
             }
         }

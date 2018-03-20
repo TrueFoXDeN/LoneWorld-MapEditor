@@ -3,6 +3,7 @@ package gui;
 import actions.*;
 import data.C;
 import data.Tiles;
+import data.Tools;
 import draw.Draw;
 
 import javax.swing.*;
@@ -14,9 +15,11 @@ public class Gui {
 
     public static Draw d;
 
-    static public JFrame jfNew, jfMain, jfSettings, jfTileset;
+    public static JFrame jfNew, jfMain, jfSettings, jfTileset;
     public static JButton[] buttons = new JButton[9];
     public static JButton reset, create, oksettings, oktileset, opentileset;
+
+    public static JButton[] tools = new JButton[3];
 
     public static JTextArea[] inputNew = new JTextArea[3];
     public static JTextArea inputTileset;
@@ -212,6 +215,22 @@ public class Gui {
         reset.setVisible(true);
         reset.setToolTipText("Reset Map position & size");
         jfMain.add(reset);
+
+        for (int i = 0; i < tools.length; i++) {
+            tools[i] = new JButton();
+            tools[i].setBounds((i * 75)+ 30, 7, 60, 60);
+            tools[i].setBackground(C.buttonFill);
+            tools[i].setIcon(new ImageIcon("rsc/icons/tools/t" + (i + 1) + ".png"));
+            tools[i].setBorder(border);
+            tools[i].setBorderPainted(true);
+            tools[i].addActionListener(new ActionHandler());
+            tools[i].addMouseListener(new MouseHandler());
+            tools[i].setFocusPainted(false);
+            tools[i].setVisible(true);
+            jfMain.add(tools[i]);
+        }
+
+        tools[Tools.active].setBorder(borderActive);
 
 
         create = new JButton("Create");

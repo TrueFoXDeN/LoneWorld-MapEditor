@@ -2,11 +2,15 @@ package actions;
 
 import data.C;
 import data.Map;
+import data.Mouse;
+import data.Tools;
 import gui.Gui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 @SuppressWarnings("Duplicates")
 public class MouseHandler implements MouseListener {
 
@@ -23,26 +27,34 @@ public class MouseHandler implements MouseListener {
                 MouseMotionHandler.startX = e.getX();
                 MouseMotionHandler.startY = e.getY();
             }
+
+            if(Tools.rectVisible){
+                Tools.start = null;
+                Tools.end = null;
+                Tools.rectVisible = false;
+            }
         }
 
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (Map.mapActive) {
-                if(Gui.activeButton == 7){
-                    Map.addCollision(e);
-                    Map.removeCollision(e);
-                }else if(Gui.activeButton == 4){
-                    Map.addTile(e,0);
-                    Map.removeTile(e, 0);
-                }
-                else if(Gui.activeButton == 5){
-                    Map.addTile(e,1);
-                    Map.removeTile(e, 1);
-                }
-                else if(Gui.activeButton == 6){
-                    Map.addTile(e,2);
-                    Map.removeTile(e, 2);
-                }
+                if (Tools.active == 0) {
+                    if (Gui.activeButton == 7) {
+                        Map.addCollision(e);
+                        Map.removeCollision(e);
+                    }
+                    Map.setTile(e);
 
+                } else if (Tools.active == 2) {
+                    if(!SwingUtilities.isRightMouseButton(e)){
+                        if (Mouse.insideMap) {
+                            Tools.start = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
+                            Tools.end = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
+                            Tools.rectVisible = true;
+                        }
+                    }
+
+
+                }
             }
         }
 
@@ -50,6 +62,21 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (SwingUtilities.isLeftMouseButton(e)) {
+            if(!SwingUtilities.isRightMouseButton(e)){
+                if (Map.mapActive) {
+                    if (Mouse.insideMap) {
+                        if (Tools.active == 2) {
+                            Tools.end = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
+                            Tools.fillRect(e);
+
+                        }
+                    }
+
+                }
+            }
+
+        }
 
     }
 
