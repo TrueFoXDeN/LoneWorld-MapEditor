@@ -12,6 +12,6 @@ public class Main {
         g.create();
         IL.setupTextures();
         Tiles.create();
-
+        Tiles.calcScroll();
     }
 }

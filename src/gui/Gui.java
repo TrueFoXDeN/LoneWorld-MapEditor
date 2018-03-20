@@ -148,10 +148,12 @@ public class Gui {
         inputTileset.setVisible(true);
         jfTileset.add(inputTileset);
 
-        scroll = new JScrollBar(JScrollBar.VERTICAL, 0, 400, 0, 400);
-        scroll.setBounds(getWidth() - 20, getHeight() - 200, 20, 200);
+        scroll = new JScrollBar(JScrollBar.VERTICAL, 0, 10, 0, 1000);
+        scroll.setBounds(getWidth() - 20, getHeight() - 208, 20, 208);
         scroll.addAdjustmentListener(new AdjustHandler());
         scroll.setVisible(true);
+
+
 
 
         for (int i = 0; i < inputNew.length; i++) {

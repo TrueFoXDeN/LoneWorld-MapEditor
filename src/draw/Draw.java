@@ -117,10 +117,10 @@ public class Draw extends JLabel {
 
         //DrawTileScreen
         g.setColor(C.background);
-        g.fillRect(gui.getWidth() - 200, gui.getHeight() - 200, 200, 200);
+        g.fillRect(gui.getWidth() - 200, gui.getHeight() - 208, 200, 208);
 
         g.setColor(C.border);
-        g.drawRect(gui.getWidth() - 200, gui.getHeight() - 200, 200, 200);
+        g.drawRect(gui.getWidth() - 200, gui.getHeight() - 208, 200, 208);
 
         g.setColor(C.background);
         g.fillRect(0, 0, gui.getWidth(), 75);
