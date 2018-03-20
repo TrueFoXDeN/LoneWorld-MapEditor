@@ -13,6 +13,8 @@ public class Tools {
     public static Point end = new Point();
     public static boolean rectVisible = false;
 
+    public static int pickupTile = 0;
+
     public static void setActive(int i) {
         active = i;
         for (JButton tool : Gui.tools) {
@@ -79,6 +81,51 @@ public class Tools {
 
         rectVisible = false;
 
+    }
+
+    public static void fillArea(int x, int y, int original, int fill, int[][] arr) {
+        int maxX = arr.length - 1;
+        int maxY = arr[0].length - 1;
+        int[][] stack = new int[(maxX + 1) * (maxY + 1)][2];
+        int index = 0;
+
+        stack[0][0] = x;
+        stack[0][1] = y;
+        arr[x][y] = fill;
+
+        while (index >= 0) {
+            x = stack[index][0];
+            y = stack[index][1];
+            index--;
+
+            if ((x > 0) && (arr[x - 1][y] == original)) {
+                arr[x - 1][y] = fill;
+                index++;
+                stack[index][0] = x - 1;
+                stack[index][1] = y;
+            }
+
+            if ((x < maxX) && (arr[x + 1][y] == original)) {
+                arr[x + 1][y] = fill;
+                index++;
+                stack[index][0] = x + 1;
+                stack[index][1] = y;
+            }
+
+            if ((y > 0) && (arr[x][y - 1] == original)) {
+                arr[x][y - 1] = fill;
+                index++;
+                stack[index][0] = x;
+                stack[index][1] = y - 1;
+            }
+
+            if ((y < maxY) && (arr[x][y + 1] == original)) {
+                arr[x][y + 1] = fill;
+                index++;
+                stack[index][0] = x;
+                stack[index][1] = y + 1;
+            }
+        }
     }
 
 }

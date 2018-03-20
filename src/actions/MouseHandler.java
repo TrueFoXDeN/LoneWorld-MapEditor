@@ -1,9 +1,6 @@
 package actions;
 
-import data.C;
-import data.Map;
-import data.Mouse;
-import data.Tools;
+import data.*;
 import gui.Gui;
 
 import javax.swing.*;
@@ -28,7 +25,7 @@ public class MouseHandler implements MouseListener {
                 MouseMotionHandler.startY = e.getY();
             }
 
-            if(Tools.rectVisible){
+            if (Tools.rectVisible) {
                 Tools.start = null;
                 Tools.end = null;
                 Tools.rectVisible = false;
@@ -37,23 +34,42 @@ public class MouseHandler implements MouseListener {
 
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (Map.mapActive) {
-                if (Tools.active == 0) {
-                    if (Gui.activeButton == 7) {
-                        Map.addCollision(e);
-                        Map.removeCollision(e);
-                    }
-                    Map.setTile(e);
-
-                } else if (Tools.active == 2) {
-                    if(!SwingUtilities.isRightMouseButton(e)){
-                        if (Mouse.insideMap) {
-                            Tools.start = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
-                            Tools.end = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
-                            Tools.rectVisible = true;
+                switch (Tools.active) {
+                    case 0:
+                        if (Gui.activeButton == 7) {
+                            Map.addCollision(e);
+                            Map.removeCollision(e);
                         }
-                    }
+                        Map.setTile(e);
+                        break;
+                    case 1:
+                        if (Mouse.insideMap) {
+                            switch (Gui.activeButton) {
+                                case 4:
+                                    Tools.pickupTile = Map.layer1[Mouse.pos.x][Mouse.pos.y];
+                                    Tools.fillArea(Mouse.pos.x, Mouse.pos.y, Tools.pickupTile, Tiles.active, Map.layer1);
+                                    break;
+                                case 5:
+                                    Tools.pickupTile = Map.layer2[Mouse.pos.x][Mouse.pos.y];
+                                    Tools.fillArea(Mouse.pos.x, Mouse.pos.y, Tools.pickupTile, Tiles.active, Map.layer1);
+                                    break;
+                                case 6:
+                                    Tools.pickupTile = Map.layer3[Mouse.pos.x][Mouse.pos.y];
+                                    Tools.fillArea(Mouse.pos.x, Mouse.pos.y, Tools.pickupTile, Tiles.active, Map.layer1);
+                                    break;
+                            }
 
-
+                        }
+                        break;
+                    case 2:
+                        if (!SwingUtilities.isRightMouseButton(e)) {
+                            if (Mouse.insideMap) {
+                                Tools.start = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
+                                Tools.end = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
+                                Tools.rectVisible = true;
+                            }
+                        }
+                        break;
                 }
             }
         }
@@ -63,7 +79,7 @@ public class MouseHandler implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
-            if(!SwingUtilities.isRightMouseButton(e)){
+            if (!SwingUtilities.isRightMouseButton(e)) {
                 if (Map.mapActive) {
                     if (Mouse.insideMap) {
                         if (Tools.active == 2) {
