@@ -71,9 +71,6 @@ public class ActionHandler implements ActionListener {
                     IL.setupTextures();
 
                     Tiles.create();
-                    Tiles.scroll = 0;
-                    Tiles.move(0);
-                    Tiles.calcScroll();
 
                     Gui.jfTileset.setVisible(false);
                 } catch (NumberFormatException e1) {
@@ -136,7 +133,7 @@ public class ActionHandler implements ActionListener {
 
         //Tools
         for (int i = 0; i < Gui.tools.length; i++) {
-            if(e.getSource().equals(Gui.tools[i])){
+            if (e.getSource().equals(Gui.tools[i])) {
                 Tools.setActive(i);
             }
         }
@@ -150,9 +147,10 @@ public class ActionHandler implements ActionListener {
                         Tiles.tiles[j].setBorder(Gui.border);
                     }
                     Tiles.tiles[Tiles.active - 1].setBorder(Gui.borderActive);
-
+                    Gui.scrollPane.revalidate();
                 }
             }
+
 
         } catch (Exception e1) {
             e1.printStackTrace();

@@ -25,7 +25,8 @@ public class Gui {
     public static JTextArea inputTileset;
     public static JLabel[] lblNew = new JLabel[3];
 
-    public static JScrollBar scroll;
+    public static JScrollPane scrollPane;
+    public static JPanel scrollPanel;
 
     public static JCheckBox checkGridVisible, checkLayerHighlight;
 
@@ -38,12 +39,13 @@ public class Gui {
 
 
     public void create() {
-        jfMain = new JFrame("Lone World - Mapeditor");
+        jfMain = new JFrame("Mapeditor");
         jfMain.setSize(WIDTH, HEIGHT);
         jfMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfMain.setLocationRelativeTo(null);
         jfMain.addMouseWheelListener(new ScrollHandler());
         jfMain.setResizable(false);
+        jfMain.setIconImage(Toolkit.getDefaultToolkit().getImage("rsc/icons/mapeditor_logo.png"));
         jfMain.setLayout(null);
 
         jfNew = new JFrame("New");
@@ -148,12 +150,15 @@ public class Gui {
         inputTileset.setVisible(true);
         jfTileset.add(inputTileset);
 
-        scroll = new JScrollBar(JScrollBar.VERTICAL, 0, 10, 0, 1000);
-        scroll.setBounds(getWidth() - 20, getHeight() - 208, 20, 208);
-        scroll.addAdjustmentListener(new AdjustHandler());
-        scroll.setVisible(true);
+        scrollPanel = new JPanel();
+        scrollPanel.setLayout(new ModifiedFlowLayout(FlowLayout.LEFT));
 
+        scrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
+        scrollPane.setBounds(getWidth() - 246, getHeight() - 210, 246, 210);
+        scrollPane.setWheelScrollingEnabled(true);
+        scrollPane.setVisible(true);
+        scrollPane.add(scrollPanel);
 
 
         for (int i = 0; i < inputNew.length; i++) {
@@ -220,7 +225,7 @@ public class Gui {
 
         for (int i = 0; i < tools.length; i++) {
             tools[i] = new JButton();
-            tools[i].setBounds((i * 75)+ 30, 7, 60, 60);
+            tools[i].setBounds((i * 75) + 30, 7, 60, 60);
             tools[i].setBackground(C.buttonFill);
             tools[i].setIcon(new ImageIcon("rsc/icons/tools/t" + (i + 1) + ".png"));
             tools[i].setBorder(border);
@@ -256,7 +261,7 @@ public class Gui {
         d.addMouseMotionListener(new MouseMotionHandler());
         jfMain.add(d);
 
-        d.add(scroll);
+        d.add(scrollPane);
 
         jfMain.requestFocus();
         jfMain.setVisible(true);
