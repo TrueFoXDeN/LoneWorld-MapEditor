@@ -51,11 +51,11 @@ public class MouseHandler implements MouseListener {
                                     break;
                                 case 5:
                                     Tools.pickupTile = Map.layer2[Mouse.pos.x][Mouse.pos.y];
-                                    Tools.fillArea(Mouse.pos.x, Mouse.pos.y, Tools.pickupTile, Tiles.active, Map.layer1);
+                                    Tools.fillArea(Mouse.pos.x, Mouse.pos.y, Tools.pickupTile, Tiles.active, Map.layer2);
                                     break;
                                 case 6:
                                     Tools.pickupTile = Map.layer3[Mouse.pos.x][Mouse.pos.y];
-                                    Tools.fillArea(Mouse.pos.x, Mouse.pos.y, Tools.pickupTile, Tiles.active, Map.layer1);
+                                    Tools.fillArea(Mouse.pos.x, Mouse.pos.y, Tools.pickupTile, Tiles.active, Map.layer3);
                                     break;
                             }
 
@@ -103,6 +103,11 @@ public class MouseHandler implements MouseListener {
                 Gui.buttons[i].setBackground(C.buttonHover);
             }
         }
+        for (int i = 0; i < Gui.tools.length; i++) {
+            if (e.getSource().equals(Gui.tools[i])) {
+                Gui.tools[i].setBackground(C.buttonHover);
+            }
+        }
         if (e.getSource().equals(Gui.reset)) {
             Gui.reset.setBackground(C.buttonHover);
         }
@@ -126,6 +131,11 @@ public class MouseHandler implements MouseListener {
         for (int i = 0; i < Gui.buttons.length; i++) {
             if (e.getSource().equals(Gui.buttons[i])) {
                 Gui.buttons[i].setBackground(C.buttonFill);
+            }
+        }
+        for (int i = 0; i < Gui.tools.length; i++) {
+            if (e.getSource().equals(Gui.tools[i])) {
+                Gui.tools[i].setBackground(C.buttonFill);
             }
         }
         if (e.getSource().equals(Gui.reset)) {

@@ -40,6 +40,7 @@ public class ActionHandler implements ActionListener {
                         break;
                     case 8:
                         Gui.jfSettings.setVisible(true);
+                        Gui.jfSettings.requestFocus();
                         break;
                 }
 
@@ -78,6 +79,7 @@ public class ActionHandler implements ActionListener {
                 }
 
             }
+           // Gui.inputTileset.requestFocus();
         }
 
         if (e.getSource().equals(Gui.oksettings)) {

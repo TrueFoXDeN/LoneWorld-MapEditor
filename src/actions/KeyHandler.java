@@ -26,6 +26,15 @@ public class KeyHandler implements KeyListener {
                 e.consume();
             }
         }
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (Gui.jfNew.isVisible()) {
+                Gui.create.doClick();
+            } else if (Gui.jfSettings.isVisible()) {
+                Gui.oksettings.doClick();
+            } else if (Gui.jfTileset.isVisible()) {
+                Gui.oktileset.doClick();
+            }
+        }
     }
 
     @Override

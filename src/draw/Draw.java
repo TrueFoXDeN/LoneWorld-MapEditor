@@ -11,7 +11,6 @@ import java.awt.*;
 
 public class Draw extends JLabel {
 
-    Gui gui = new Gui();
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -123,10 +122,10 @@ public class Draw extends JLabel {
         g.drawRect(gui.getWidth() - 200, gui.getHeight() - 208, 200, 208);
 */
         g.setColor(C.background);
-        g.fillRect(0, 0, gui.getWidth(), 75);
+        g.fillRect(0, 0, Gui.getWidth(), 75);
 
         g.setColor(C.border);
-        g.drawLine(0, 75, gui.getWidth(), 75);
+        g.drawLine(0, 75, Gui.getWidth(), 75);
 
         repaint();
     }

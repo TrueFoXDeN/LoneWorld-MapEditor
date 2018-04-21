@@ -9,6 +9,10 @@ import draw.Draw;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 
 public class Gui {
@@ -35,7 +39,7 @@ public class Gui {
 
     public static int activeButton = 0;
 
-    private final int WIDTH = 1280, HEIGHT = 720;
+    private static int WIDTH = 1280, HEIGHT = 720;
 
 
     public void create() {
@@ -44,8 +48,18 @@ public class Gui {
         jfMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfMain.setLocationRelativeTo(null);
         jfMain.addMouseWheelListener(new ScrollHandler());
-        jfMain.setResizable(false);
+        jfMain.setResizable(true);
+        jfMain.addKeyListener(new KeyHandler());
         jfMain.setIconImage(Toolkit.getDefaultToolkit().getImage("rsc/icons/mapeditor_logo.png"));
+        jfMain.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+                setWIDTH(e.getComponent().getWidth());
+                setHEIGHT(e.getComponent().getHeight());
+
+            }
+        });
         jfMain.setLayout(null);
 
         jfNew = new JFrame("New");
@@ -68,6 +82,7 @@ public class Gui {
         jfSettings.setLocationRelativeTo(null);
         jfSettings.setResizable(false);
         jfSettings.setLayout(null);
+        jfSettings.addKeyListener(new KeyHandler());
 
         JLabel[] lblSettings = new JLabel[5];
         for (int i = 0; i < lblSettings.length; i++) {
@@ -99,12 +114,18 @@ public class Gui {
         checkGridVisible.setSelected(true);
         checkGridVisible.setVisible(true);
         checkGridVisible.setBounds(102, 112, 20, 20);
+        checkGridVisible.addActionListener(e->{
+            jfSettings.requestFocus();
+        });
         jfSettings.add(checkGridVisible);
 
         checkLayerHighlight = new JCheckBox();
         checkLayerHighlight.setSelected(true);
         checkLayerHighlight.setVisible(true);
         checkLayerHighlight.setBounds(102, 143, 20, 20);
+        checkLayerHighlight.addActionListener(e ->{
+            jfSettings.requestFocus();
+        });
         jfSettings.add(checkLayerHighlight);
 
         oksettings = new JButton("Ok");
@@ -148,12 +169,13 @@ public class Gui {
         inputTileset = new JTextArea(String.valueOf(Tiles.anzahl));
         inputTileset.setBounds(125, 25, 75, 20);
         inputTileset.setVisible(true);
+        inputTileset.addKeyListener(new KeyHandler());
         jfTileset.add(inputTileset);
 
         scrollPanel = new JPanel();
         scrollPanel.setLayout(new ModifiedFlowLayout(FlowLayout.LEFT));
 
-        scrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         scrollPane.setBounds(getWidth() - 246, getHeight() - 210, 246, 210);
         scrollPane.setWheelScrollingEnabled(true);
@@ -212,7 +234,7 @@ public class Gui {
         setButtonActive(4);
 
         reset = new JButton("Reset");
-        reset.setBounds(WIDTH - 250, 7, 60, 60);
+        reset.setBounds(WIDTH - 105, 7, 60, 60);
         reset.setBackground(C.buttonFill);
         reset.setBorder(border);
         reset.setBorderPainted(true);
@@ -220,7 +242,7 @@ public class Gui {
         reset.addMouseListener(new MouseHandler());
         reset.setFocusPainted(false);
         reset.setVisible(true);
-        reset.setToolTipText("Reset Map position & size");
+        reset.setToolTipText("Reset Map position & size. Not the Map.");
         jfMain.add(reset);
 
         for (int i = 0; i < tools.length; i++) {
@@ -281,12 +303,38 @@ public class Gui {
 
     }
 
-    public int getWidth() {
+    public static int getWidth() {
         return WIDTH - 14;
     }
 
-    public int getHeight() {
+    public static int getHeight() {
         return HEIGHT - 36;
     }
 
+    public void setWIDTH(int WIDTH) {
+        Gui.WIDTH = WIDTH;
+
+        try {
+            jfMain.revalidate();
+            d.setSize(WIDTH, getHeight());
+            scrollPane.setBounds(WIDTH - 250, getHeight() - 250, 246, 210);
+            for (int i = 0; i < buttons.length; i++) {
+                buttons[i].setBounds((i * 75) + (WIDTH / 4) +25, 7, 60, 60);
+            }
+            reset.setBounds(WIDTH - 105, 7, 60, 60);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setHEIGHT(int HEIGHT) {
+        Gui.HEIGHT = HEIGHT;
+        try {
+            jfMain.revalidate();
+            d.setSize(getWidth(), HEIGHT);
+            scrollPane.setBounds(getWidth() - 250, HEIGHT - 250, 246, 210);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
