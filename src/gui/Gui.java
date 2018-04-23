@@ -114,7 +114,7 @@ public class Gui {
         checkGridVisible.setSelected(true);
         checkGridVisible.setVisible(true);
         checkGridVisible.setBounds(102, 112, 20, 20);
-        checkGridVisible.addActionListener(e->{
+        checkGridVisible.addActionListener(e -> {
             jfSettings.requestFocus();
         });
         jfSettings.add(checkGridVisible);
@@ -123,7 +123,7 @@ public class Gui {
         checkLayerHighlight.setSelected(true);
         checkLayerHighlight.setVisible(true);
         checkLayerHighlight.setBounds(102, 143, 20, 20);
-        checkLayerHighlight.addActionListener(e ->{
+        checkLayerHighlight.addActionListener(e -> {
             jfSettings.requestFocus();
         });
         jfSettings.add(checkLayerHighlight);
@@ -318,8 +318,16 @@ public class Gui {
             jfMain.revalidate();
             d.setSize(WIDTH, getHeight());
             scrollPane.setBounds(WIDTH - 250, getHeight() - 250, 246, 210);
+
+            int space = WIDTH / 2 - buttons.length * 75;
+            if (space < 0) {
+                space = 0;
+            }
+
+            System.out.println(space);
+
             for (int i = 0; i < buttons.length; i++) {
-                buttons[i].setBounds((i * 75) + (WIDTH / 4) +25, 7, 60, 60);
+                buttons[i].setBounds((i * 75) + (WIDTH / 4) + space/2, 7, 60, 60);
             }
             reset.setBounds(WIDTH - 105, 7, 60, 60);
         } catch (Exception e) {
