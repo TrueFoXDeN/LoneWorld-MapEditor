@@ -10,7 +10,7 @@ import java.awt.*;
 public class Tiles {
 
 
-    public static int active = 1, anzahl = 6;
+    public static int active = 1, anzahl = 3;
 
     public static JButton[] tiles;
 

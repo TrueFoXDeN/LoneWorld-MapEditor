@@ -79,7 +79,7 @@ public class ActionHandler implements ActionListener {
                 }
 
             }
-           // Gui.inputTileset.requestFocus();
+            // Gui.inputTileset.requestFocus();
         }
 
         if (e.getSource().equals(Gui.oksettings)) {
@@ -137,6 +137,14 @@ public class ActionHandler implements ActionListener {
         for (int i = 0; i < Gui.tools.length; i++) {
             if (e.getSource().equals(Gui.tools[i])) {
                 Tools.setActive(i);
+                switch (i) {
+                    case 0:
+                        Tools.rectVisible = false;
+                        break;
+                    case 1:
+                        Tools.rectVisible = false;
+                        break;
+                }
             }
         }
 

@@ -58,7 +58,6 @@ public class MouseHandler implements MouseListener {
                                     Tools.fillArea(Mouse.pos.x, Mouse.pos.y, Tools.pickupTile, Tiles.active, Map.layer3);
                                     break;
                             }
-
                         }
                         break;
                     case 2:
@@ -67,13 +66,16 @@ public class MouseHandler implements MouseListener {
                                 Tools.start = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
                                 Tools.end = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
                                 Tools.rectVisible = true;
+                            } else {
+                                if (Tools.rectVisible) {
+                                    Tools.rectVisible = false;
+                                }
                             }
                         }
                         break;
                 }
             }
         }
-
     }
 
     @Override
@@ -85,15 +87,11 @@ public class MouseHandler implements MouseListener {
                         if (Tools.active == 2) {
                             Tools.end = Mouse.posToCoord(Mouse.coordToPos(new Point(e.getX(), e.getY())));
                             Tools.fillRect(e);
-
                         }
                     }
-
                 }
             }
-
         }
-
     }
 
     @Override
