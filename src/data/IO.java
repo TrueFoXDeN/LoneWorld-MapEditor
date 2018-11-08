@@ -36,6 +36,8 @@ public class IO {
             sb.append(Map.kachelnY + 1);
             sb.append(",");
             sb.append(Map.kachelGroesse);
+            sb.append(",");
+            sb.append(Tiles.anzahl);
 
             sb.append("\n");
 
@@ -129,6 +131,8 @@ public class IO {
                     Map.kachelnX = Integer.parseInt(ss1[0])-1;
                     Map.kachelnY = Integer.parseInt(ss1[1])-1;
                     Map.kachelGroesse = Integer.parseInt(ss1[2]);
+                    Tiles.anzahl = Integer.parseInt(ss1[3]);
+                    Tiles.create();
                     Map.mapActive = true;
                     Map.reset();
 
