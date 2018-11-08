@@ -30,6 +30,7 @@ public class IO {
         }
 
         try {
+            sb.delete(0,sb.capacity());
             sb.append(Map.kachelnX + 1);
             sb.append(",");
             sb.append(Map.kachelnY + 1);
