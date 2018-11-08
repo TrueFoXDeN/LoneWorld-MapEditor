@@ -23,7 +23,7 @@ public class IL {
     }
 
     public static void setupTextures() {
-
+        System.out.println(Tiles.anzahl);
         texture = new BufferedImage[Tiles.anzahl];
         for (int i = 0; i < texture.length; i++) {
             try {

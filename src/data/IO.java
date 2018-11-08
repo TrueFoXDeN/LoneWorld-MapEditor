@@ -1,5 +1,7 @@
 package data;
 
+import draw.IL;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -131,8 +133,10 @@ public class IO {
                     Map.kachelnX = Integer.parseInt(ss1[0])-1;
                     Map.kachelnY = Integer.parseInt(ss1[1])-1;
                     Map.kachelGroesse = Integer.parseInt(ss1[2]);
-                    Tiles.anzahl = Integer.parseInt(ss1[3]);
+                    Tiles.anzahl = Integer.parseInt(ss1[3])+1;
+
                     Tiles.create();
+                    IL.setupTextures();
                     Map.mapActive = true;
                     Map.reset();
 
