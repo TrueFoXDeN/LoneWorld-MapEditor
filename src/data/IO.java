@@ -107,7 +107,7 @@ public class IO {
         if (temp == JFileChooser.APPROVE_OPTION) {
             String path = chooser.getSelectedFile().getAbsolutePath();
 
-            if (path.endsWith("mapdata.txt")) {
+            if (path.endsWith(".txt")) {
                 file = new File(path);
                 try {
                     Scanner sc = new Scanner(file);
