@@ -30,7 +30,9 @@ public class ActionHandler implements ActionListener {
                         Gui.jfNew.setVisible(true);
                         break;
                     case 1:
-                        IO.safe();
+                        if(Map.mapActive){
+                            IO.safe();
+                        }
                         break;
                     case 2:
                         IO.load();

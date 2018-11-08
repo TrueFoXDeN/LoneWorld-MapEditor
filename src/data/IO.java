@@ -148,7 +148,6 @@ public class IO {
                             temp2 ++;
 
                         }
-
                     }
 
                     sc.close();
