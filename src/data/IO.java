@@ -141,7 +141,7 @@ public class IO {
                     Map.reset();
 
                     Map.collision.clear();
-                    for (int i = 0; i < ss2.length - 1; i++) {
+                    for (int i = 0; i < ss2.length - 1; i+=2) {
                         Map.collision.add(new Point(Integer.parseInt(ss2[i]), Integer.parseInt(ss2[i + 1])));
                     }
 
